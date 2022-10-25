@@ -4,19 +4,21 @@ import Image from 'next/image'
 
 const Home: NextPage = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="flex min-h-screen flex-col py-8">
       <Head>
-        <title>Create Next App</title>
+        <title>OpenSource Recipes</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Tangerine" />
       </Head>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+      <main className="flex w-full flex-1 flex-col px-20">
+        <div className="flex flex-col w-full">
+          <h1 className="text-6xl font-bold self-start">
+            Open Source
+          </h1>
+          <span className="italic font-cursive-lettering -mt-8 text-8xl text-orange-600 self-end">Recipes</span>
+        </div>
 
         <p className="mt-3 text-2xl">
           Get started by editing{' '}
