@@ -98,6 +98,12 @@ const Home: NextPage = () => {
 
       <main className="flex w-full flex-1 flex-col px-20">
         <div className="flex flex-row">
+          <Image
+            src="/OSR_Logo_vector.svg"
+            height={64}
+            width={64}
+            alt="Opensource Recipes Logo"
+          />
           <div
             id="logo_container"
             className="flex flex-col w-full justify-start">
