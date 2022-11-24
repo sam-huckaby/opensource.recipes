@@ -4,18 +4,20 @@ import Image from 'next/image';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { Credential } from 'utils/beyondidentity';
 import { useEffect, useState } from 'react';
+import { RoundedSpinner } from 'components/loaders';
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
   const [credentials, setCredentials] = useState<Credential[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
       const BeyondIdentity = await import('utils/beyondidentity');
       const embedded = new BeyondIdentity.default();
       const credList = await embedded.getCredentials();
+      setLoading(false);
       setCredentials(credList);
-      console.log(credList);
     })();
   }, []);
 
@@ -59,6 +61,8 @@ const Home: NextPage = () => {
       onClick={() => signOut()}>
       Sign Out
     </button>
+  ) : loading ? (
+    <RoundedSpinner />
   ) : credentials.length > 0 ? (
     <button
       className="whitespace-nowrap border rounded p-2 h-12 hover:bg-orange-400 hover:border-orange-400 hover:bg-opacity-50"
