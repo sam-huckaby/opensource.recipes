@@ -1,10 +1,11 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { Credential } from '@beyondidentity/bi-sdk-js';
 import { RoundedSpinner } from 'components/loaders';
 import Image from 'next/image';
 
 const BIAuthenticate = () => {
-  const [biAuthenticateResult, setBiAuthenticateResult] = useState('');
   const [credentialList, setCredentialList] = useState<Credential[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [authUrl, setAuthUrl] = useState<string>('');
@@ -26,7 +27,6 @@ const BIAuthenticate = () => {
 
         // Retrieve a list of available credentials on this device
         const credentials: Credential[] = await embedded.getCredentials();
-        console.log(credentials);
         // Populate the list of credentials to select from
         setCredentialList(credentials);
         // Mark loading complete

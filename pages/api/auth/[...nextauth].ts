@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth';
+import { sign } from 'jsonwebtoken';
 
 import { BI_APPLICATION_ID, BI_REALM_ID, BI_TENANT_ID } from 'constants/auth';
 
@@ -25,7 +26,17 @@ export default NextAuth({
   ],
   callbacks: {
     async jwt({ token, account, profile }) {
-      return token;
+      // Inspired by: https://medium.com/@gracew/using-supabase-rls-with-a-custom-auth-provider-b31564172d5d
+      // Create a Supabase-Secret-signed JWT to pass user id to Supabase for auth
+      const supaToken = sign(
+        { userId: token.sub },
+        process.env.SUPABASE_JWT_SECRET || ''
+      );
+      // Wrap the new Supabase token into the next-auth token
+      return {
+        supaToken,
+        ...token,
+      };
     },
   },
 });

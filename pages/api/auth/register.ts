@@ -2,13 +2,16 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { supabase } from 'utils/supabase';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  // Hopefully we always send an email...
   const email = req.body.email;
-  console.log(req.body.email);
+
+  // If there is no email, return an error
   if (!email) {
     return res.status(422).send('Missing email for registration');
   }
 
   /*
+  	EXAMPLE IDENTITY RESPONSE
  	{
 		"id": "e372db224c06e850",
 		"realm_id": "8f5bec58229e6f29",
@@ -45,7 +48,29 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     )
   ).json();
 
-  console.log(identity);
+  /*
+  EXAMPLE CONFLICT RESPONSE:
+	{
+		code: 'conflict',
+		message: 'username already exists',
+		details: [
+			{
+				type: 'ResourceInfo',
+				resource_type: 'Identity',
+				id: 'a2f18962e112f9b9',
+				description: 'duplicate username'
+			}
+		]
+	}
+  */
+  if (identity.code) {
+    switch (identity.code) {
+      case 'conflict':
+        return res.status(409).send(identity.message);
+      default:
+        return res.status(500).send(identity.message);
+    }
+  }
 
   const credentialBindingJob = await (
     await fetch(
