@@ -14,9 +14,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AuthSessionProvider>
-          <div className="min-h-screen">
+          <div className="min-h-screen flex flex-col">
             <Header />
-            {children}
+            <div className="grow">{children}</div>
             <Footer />
           </div>
         </AuthSessionProvider>

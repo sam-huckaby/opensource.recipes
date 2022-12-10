@@ -4,12 +4,13 @@ import Image from "next/image";
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { RoundedSpinner } from "./loaders";
 import { FormEvent, MouseEvent, useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Header() {
   const { data: session } = useSession();
   const [loading, setLoading] = useState<boolean>(true);
   const [credentials, setCredentials] = useState<Credential[]>([]);
-  const [registerDialogOpen, setRegisterDialogOpen] = useState<boolean>(false);
+  const [registerPanelOpen, setRegisterPanelOpen] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [email, setEmail] = useState<string | undefined>();
 
@@ -29,8 +30,8 @@ export default function Header() {
     setErrorMessage(undefined);
 
     // If the button was clicked for the first time, just open the input
-    if (!registerDialogOpen) {
-      setRegisterDialogOpen(true);
+    if (!registerPanelOpen) {
+      setRegisterPanelOpen(true);
       return;
     }
 
@@ -65,7 +66,7 @@ export default function Header() {
     // Reset the form after submission.
     // This may be unnecessary, since they should leave the page during auth
     setEmail(undefined);
-    setRegisterDialogOpen(false);
+    setRegisterPanelOpen(false);
 
     // Convert the response (which should be valid to reach this point) to JSON for redirect
     const result = await req.json();
@@ -98,7 +99,7 @@ export default function Header() {
       {errorMessage && (
         <span className="absolute -mt-4 text-sm">{errorMessage}</span>
       )}
-      {registerDialogOpen && (
+      {registerPanelOpen && (
         <input
           type="email"
           pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
@@ -116,23 +117,34 @@ export default function Header() {
     </form>
   );
 
-  return <div className="flex flex-row pt-8 px-4">
+  return (
+    <div className="flex flex-col pt-8 shadow-sm">
+      <div className="flex flex-row items-center pb-4 px-32">
+        <Link href="/" className="flex flex-row">
           <Image
             src="/OSR_Logo_vector.svg"
-            height={64}
-            width={64}
+            height={30}
+            width={30}
             alt="Opensource Recipes Logo"
           />
           <div
             id="logo_container"
             className="flex flex-col w-full justify-start">
-            <h1 className="text-4xl font-bold">Open Source</h1>
-            <span className="italic font-cursive-lettering -mt-4 text-6xl text-orange-600">
+            <h1 className="text-lg font-bold">Open Source</h1>
+            <span className="italic font-cursive-lettering -mt-4 text-xl text-orange-600">
               Recipes
             </span>
           </div>
-          <div className="flex flex-row" id="account_container">
-            {authButton}
-          </div>
-        </div>;
+        </Link>
+        <span className="grow">&nbsp;</span>
+        <div className="flex flex-row" id="account_container">
+          {authButton}
+        </div>
+      </div>
+      <div className="flex flex-row items-center px-32 border-b font-bold">
+        {/* I wanted to call this "Register" like the Vim register, but it seemed like that would be confusing */}
+        <Link href={`/workbook`} className="hover:underline hover:decoration-orange-400 p-2">Workbook</Link>
+      </div>
+    </div>
+  );
 }
