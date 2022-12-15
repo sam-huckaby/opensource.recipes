@@ -46,14 +46,14 @@ const BIAuthenticate = () => {
     const embedded = await BeyondIdentityEmbeddedSdk.Embedded.initialize();
 
     // Perform authentication using selected credential's ID
-    const { redirectURL } = await embedded.authenticate(authUrl, selectedId);
+    const response = await embedded.authenticate(authUrl, selectedId);
 
     // Move the user on to the app
-    window.location.href = redirectURL;
+    window.location.href = response.redirectURL;
   };
 
   return (
-    <div className="flex justify-center items-center h-full">
+    <div className="flex justify-center items-center min-h-screen">
       <div className="flex flex-col justify-center items-center">
         <h1 className="pb-4 text-xl">Login as:</h1>
         <div className="relative flex flex-col overflow-scroll w-[400px] min-h-[400px] max-h-[400px] shadow-inner pr-4 pl-4 pb-4">

@@ -3,7 +3,6 @@
 import Head from 'next/head';
 import { FC } from 'react';
 import { useGetRecipes } from 'hooks/useRecipes';
-import Link from 'next/link';
 import { RecipeTiles } from 'components/RecipeTiles';
 
 const Home: FC = () => {

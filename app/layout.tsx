@@ -1,7 +1,5 @@
 import '../styles/globals.css';
 import AuthSessionProvider from '../context/SessionProvider';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
 
 export default function RootLayout({
   // Layouts must accept a children prop.
@@ -15,9 +13,7 @@ export default function RootLayout({
       <body>
         <AuthSessionProvider>
           <div className="min-h-screen flex flex-col">
-            <Header />
-            <div className="grow">{children}</div>
-            <Footer />
+            {children}
           </div>
         </AuthSessionProvider>
       </body>

@@ -10,6 +10,7 @@ type PageProps = {
 };
 
 const AuthSessionProvider: FC<PageProps> = ({ children, session }) => {
+
 	return (
 		<SessionProvider session={session}>
       			{ children }

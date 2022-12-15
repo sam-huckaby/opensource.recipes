@@ -83,7 +83,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         body: JSON.stringify({
           job: {
             delivery_method: 'RETURN',
-            post_binding_redirect_uri: 'http://localhost:3000/',
+            post_binding_redirect_uri: process.env.APP_HOST,
             authenticator_config_id: process.env.AUTHENTICATOR_CONFIG_ID,
           },
         }),

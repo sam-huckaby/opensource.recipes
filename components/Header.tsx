@@ -136,14 +136,15 @@ export default function Header() {
             </span>
           </div>
         </Link>
-        <span className="grow">&nbsp;</span>
+        <span className="grow h-12 p-2">&nbsp;</span>
         <div className="flex flex-row" id="account_container">
           {authButton}
         </div>
       </div>
       <div className="flex flex-row items-center px-32 border-b font-bold">
         {/* I wanted to call this "Register" like the Vim register, but it seemed like that would be confusing */}
-        <Link href={`/workbook`} className="hover:underline hover:decoration-orange-400 p-2">Workbook</Link>
+        <Link href={`/workbook`} className="hover:underline hover:decoration-orange-400 p-2 underline-offset-8">Workbook</Link>
+        <Link href={`/contribute`} className="hover:underline hover:decoration-orange-400 p-2 underline-offset-8">Contribute</Link>
       </div>
     </div>
   );
