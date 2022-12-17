@@ -25,7 +25,7 @@ export default NextAuth({
     },
   ],
   callbacks: {
-    jwt: async ({ token }) => {
+    jwt: async ({ token, account, profile }) => {
       // Inspired by: https://medium.com/@gracew/using-supabase-rls-with-a-custom-auth-provider-b31564172d5d
       // Create a Supabase-Secret-signed JWT to pass user id to Supabase for auth
       const supaToken = sign(
@@ -41,6 +41,7 @@ export default NextAuth({
     session: async ({session, token}) => {
     // Append the userId to the session, so we can use it on the client side
     session.user.id = token.sub;
+    //session.user.email = token.email;
 
     return session;
     },

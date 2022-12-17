@@ -7,7 +7,9 @@ declare module "next-auth" {
   interface Session {
     user: {
       /** The user's Beyond Identity ID. */
-      id?: string
+      id?: string,
+      /** The user's email */
+      email?: string,
     }
   }
 }
