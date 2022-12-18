@@ -1,3 +1,5 @@
+import { SaveToWorkbook } from "components/SaveToWorkbook";
+
 type PageParams = {
 	params: {
 		recipeId: string;
@@ -10,9 +12,14 @@ const RecipeDetail = async ({ params }: PageParams) => {
 	const recipe = await (await fetch(`${process.env.APP_HOST}/api/recipes/${params.recipeId}`)).json();
 
 	return (
-		<div>
-			<h1 className="text-2xl">{ recipe.title }</h1>
-			<p className="italic">{ recipe.description }</p>
+		<div className="px-8 mt-16 flex flex-col">
+			<div className="flex flex-row items-center justify-center border-b border-solid">
+				<h1 className="text-4xl mt-4 pb-2">{ recipe.title }</h1>
+			</div>
+			<p className="italic mt-2">{ recipe.description }</p>
+			<div className="flex flex-row mt-4">
+				<SaveToWorkbook />
+			</div>
 		</div>
 	);
 }

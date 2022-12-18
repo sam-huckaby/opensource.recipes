@@ -5,7 +5,7 @@ import { init as initSupabase } from 'utils/supabase';
 
 const getHandler = async (recipeId: string, res: NextApiResponse, supabase:SupabaseClient) => {
   let { data: recipe, error } = await supabase.from('recipes').select('*').eq('id', recipeId).limit(1).single();
-  console.log(recipe);
+
   if (error) {
     return res.status(500).send(error);
   }

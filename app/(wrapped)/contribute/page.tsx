@@ -6,11 +6,8 @@ const Contribute: FC = () => {
     <div className="flex flex-col grow">
       <main className="flex w-full flex-1 flex-col px-20">
         <div className="mt-6 flex w-full flex-col items-center">
-          <div className="flex flex-row text-4xl">
-            <span className="bouncing-dot">.</span>
-            <span className="bouncing-dot">.</span>
-            <span className="bouncing-dot">.</span>
-          </div>
+          <p>Build OpenSource.Recipes!</p>
+          <a href="https://github.com/sam-huckaby/opensource.recipes" className="text-orange-500">Contribute today!</a>
         </div>
       </main>
     </div>
